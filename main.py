@@ -12,11 +12,11 @@ intents.members = True
 bot = commands.Bot(command_prefix="!", intents=intents)
 
 # --- ID BEÁLLÍTÁSOK ---
-CAT_NEV_PANASZ_ELBUGGOLT_SZEF = 1013547790770642998  # Névváltás, Panasz, Elbuggolt, Széf, UB kategória
-CAT_INTERIOR = 1013705089476726805                  # Interior kérelem kategória
+CAT_NEV_PANASZ_ELBUGGOLT_SZEF = 1013547790770642998
+CAT_INTERIOR = 1013705089476726805
 
 LOG_CHANNEL_ID = 1013544907782246500
-RANG_ID = 1557077465325768745                       # Gombos rang ID
+RANG_ID = 1557077465325768745
 
 VEZETOSEG_ROLE_NAME = "Vezetőség" 
 
