@@ -52,7 +52,7 @@ class CloseTicketView(discord.ui.View):
 
         await interaction.response.send_message("A ticket 5 másodperc múlva törlésre kerül...")
         
-        embed = discord.Embed(title="🔴 Szuperadmin segítségnyújtás - Bezárva", color=discord.Color.red(), timestamp=datetime.now())
+        embed = discord.Embed(title="🔴 SinMTA segítségnyújtás - Bezárva", color=discord.Color.red(), timestamp=datetime.now())
         embed.add_field(name="Lezárta:", value=f"{interaction.user.mention} ({interaction.user.name})", inline=True)
         embed.add_field(name="Csatorna neve:", value=interaction.channel.name, inline=True)
         await send_log(interaction.guild, embed)
@@ -98,23 +98,23 @@ class NevValtasSelect(discord.ui.Select):
             overwrites[vezetoseg_role] = discord.PermissionOverwrite(read_messages=True, send_messages=True)
 
         if valasztott == "nev_valtas":
-            csatorna_nev = f"💭szuperadmin-név-váltás-{user.name}"
-            szoveg = (f"Szia! {user.mention} (Szuperadmin segítségnyújtás)\n\n"
+            csatorna_nev = f"💭sinmta-név-váltás-{user.name}"
+            szoveg = (f"Szia! {user.mention} (SinMTA segítségnyújtás)\n\n"
                       "**Mi volt az eddigi neved?**\n"
                       "**Mi legyen az új neved?**\n"
                       "**Miért szeretnél nevet változtatni?**")
         else:
-            csatorna_nev = f"🔓szuperadmin-ub-kérelem-{user.name}"
-            szoveg = (f"Szia! {user.mention} (Szuperadmin segítségnyújtás)\n\n"
+            csatorna_nev = f"🔓sinmta-ub-kérelem-{user.name}"
+            szoveg = (f"Szia! {user.mention} (SinMTA segítségnyújtás)\n\n"
                       "**IC Neved / Serialod:**\n"
                       "**Ki bannolt ki és mikor?**\n"
                       "**Miért kapod a bant és miért érdemelsz esélyt?**")
 
-        await interaction.response.send_message("A Szuperadmin segítségnyújtási kérelem megnyitása folyamatban...", ephemeral=True)
-        channel = await guild.create_text_channel(name=csatorna_nev, category=category, overwrites=overwrites, reason="Szuperadmin kérelem")
+        await interaction.response.send_message("A SinMTA segítségnyújtási kérelem megnyitása folyamatban...", ephemeral=True)
+        channel = await guild.create_text_channel(name=csatorna_nev, category=category, overwrites=overwrites, reason="SinMTA kérelem")
         await channel.send(szoveg, view=CloseTicketView())
 
-        embed = discord.Embed(title="🟢 Szuperadmin segítségnyújtás Nyitva", color=discord.Color.green(), timestamp=datetime.now())
+        embed = discord.Embed(title="🟢 SinMTA segítségnyújtás Nyitva", color=discord.Color.green(), timestamp=datetime.now())
         embed.add_field(name="Típus:", value="Névváltás" if valasztott == "nev_valtas" else "UB Kérelem", inline=True)
         embed.add_field(name="Nyitó:", value=f"{user.mention} ({user.name})", inline=True)
         embed.add_field(name="Csatorna:", value=channel.mention, inline=False)
@@ -159,25 +159,25 @@ class PanaszSelect(discord.ui.Select):
             overwrites[vezetoseg_role] = discord.PermissionOverwrite(read_messages=True, send_messages=True)
 
         if valasztott == "frakcio_panasz":
-            csatorna_nev = f"❌szuperadmin-frakció-panasz-{user.name}"
-            szoveg = (f"Szia! {user.mention} (Szuperadmin segítségnyújtás)\n\n"
+            csatorna_nev = f"❌sinmta-frakció-panasz-{user.name}"
+            szoveg = (f"Szia! {user.mention} (SinMTA segítségnyújtás)\n\n"
                       "**IC neved:**\n"
                       "**Frakció neve:**\n"
                       "**Részletes indok:**\n"
                       "**Bizonyíték:**")
         else:
-            csatorna_nev = f"❌szuperadmin-admin-panasz-{user.name}"
-            szoveg = (f"Szia! {user.mention} (Szuperadmin segítségnyújtás)\n\n"
+            csatorna_nev = f"❌sinmta-admin-panasz-{user.name}"
+            szoveg = (f"Szia! {user.mention} (SinMTA segítségnyújtás)\n\n"
                       "**IC Neved:**\n"
                       "**Admin Neve:**\n"
                       "**Részletes indok:**\n"
                       "**Bizonyíték:**")
 
         await interaction.response.send_message("A panasz csatorna létrehozása folyamatban...", ephemeral=True)
-        channel = await guild.create_text_channel(name=csatorna_nev, category=category, overwrites=overwrites, reason="Szuperadmin Panasz")
+        channel = await guild.create_text_channel(name=csatorna_nev, category=category, overwrites=overwrites, reason="SinMTA Panasz")
         await channel.send(szoveg, view=CloseTicketView())
 
-        embed = discord.Embed(title="🟢 Szuperadmin Panasz Nyitva", color=discord.Color.red(), timestamp=datetime.now())
+        embed = discord.Embed(title="🟢 SinMTA Panasz Nyitva", color=discord.Color.red(), timestamp=datetime.now())
         embed.add_field(name="Benyújtotta:", value=f"{user.mention} ({user.name})", inline=True)
         embed.add_field(name="Csatorna:", value=channel.mention, inline=False)
         await send_log(guild, embed)
@@ -218,17 +218,17 @@ class InteriorSelect(discord.ui.Select):
         if vezetoseg_role:
             overwrites[vezetoseg_role] = discord.PermissionOverwrite(read_messages=True, send_messages=True)
 
-        csatorna_nev = f"🏠szuperadmin-interior-kérelem-{user.name}"
-        szoveg = (f"Szia! {user.mention} (Szuperadmin segítségnyújtás)\n\n"
+        csatorna_nev = f"🏠sinmta-interior-kérelem-{user.name}"
+        szoveg = (f"Szia! {user.mention} (SinMTA segítségnyújtás)\n\n"
                   "**IC Neved:**\n"
                   "**Ház vagy garázs interior lerakása:**\n"
                   "**Pontos helyszín (kép / F11 térkép):**")
 
         await interaction.response.send_message("Az interior kérelem csatorna létrehozása folyamatban...", ephemeral=True)
-        channel = await guild.create_text_channel(name=csatorna_nev, category=category, overwrites=overwrites, reason="Szuperadmin Interior")
+        channel = await guild.create_text_channel(name=csatorna_nev, category=category, overwrites=overwrites, reason="SinMTA Interior")
         await channel.send(szoveg, view=CloseTicketView())
 
-        embed = discord.Embed(title="🟢 Szuperadmin Interior Kérelem Nyitva", color=discord.Color.blue(), timestamp=datetime.now())
+        embed = discord.Embed(title="🟢 SinMTA Interior Kérelem Nyitva", color=discord.Color.blue(), timestamp=datetime.now())
         embed.add_field(name="Benyújtotta:", value=f"{user.mention} ({user.name})", inline=True)
         embed.add_field(name="Csatorna:", value=channel.mention, inline=False)
         await send_log(guild, embed)
@@ -269,17 +269,17 @@ class ElbuggoltSelect(discord.ui.Select):
         if vezetoseg_role:
             overwrites[vezetoseg_role] = discord.PermissionOverwrite(read_messages=True, send_messages=True)
 
-        csatorna_nev = f"📦szuperadmin-elbuggolt-tárgyak-{user.name}"
-        szoveg = (f"Szia! {user.mention} (Szuperadmin segítségnyújtás)\n\n"
+        csatorna_nev = f"📦sinmta-elbuggolt-tárgyak-{user.name}"
+        szoveg = (f"Szia! {user.mention} (SinMTA segítségnyújtás)\n\n"
                   "**IC Neved:**\n"
                   "**Mi buggolt el és hogyan?**\n"
                   "**Bizonyíték (Kép / Videó / Log):**")
 
         await interaction.response.send_message("A csatorna létrehozása folyamatban...", ephemeral=True)
-        channel = await guild.create_text_channel(name=csatorna_nev, category=category, overwrites=overwrites, reason="Szuperadmin Elbuggolt")
+        channel = await guild.create_text_channel(name=csatorna_nev, category=category, overwrites=overwrites, reason="SinMTA Elbuggolt")
         await channel.send(szoveg, view=CloseTicketView())
 
-        embed = discord.Embed(title="🟢 Szuperadmin El buggolt tárgyak Nyitva", color=discord.Color.purple(), timestamp=datetime.now())
+        embed = discord.Embed(title="🟢 SinMTA El buggolt tárgyak Nyitva", color=discord.Color.purple(), timestamp=datetime.now())
         embed.add_field(name="Benyújtotta:", value=f"{user.mention} ({user.name})", inline=True)
         embed.add_field(name="Csatorna:", value=channel.mention, inline=False)
         await send_log(guild, embed)
@@ -320,17 +320,17 @@ class SzefSelect(discord.ui.Select):
         if vezetoseg_role:
             overwrites[vezetoseg_role] = discord.PermissionOverwrite(read_messages=True, send_messages=True)
 
-        csatorna_nev = f"💰szuperadmin-széf-kérvényezés-{user.name}"
-        szoveg = (f"Szia! {user.mention} (Szuperadmin segítségnyújtás)\n\n"
+        csatorna_nev = f"💰sinmta-széf-kérvényezés-{user.name}"
+        szoveg = (f"Szia! {user.mention} (SinMTA segítségnyújtás)\n\n"
                   "**IC Neved:**\n"
                   "**Hova szeretnéd a széfet (Interior ID / Helyszín):**\n"
                   "**Indoklás:**")
 
         await interaction.response.send_message("A csatorna létrehozása folyamatban...", ephemeral=True)
-        channel = await guild.create_text_channel(name=csatorna_nev, category=category, overwrites=overwrites, reason="Szuperadmin Széf")
+        channel = await guild.create_text_channel(name=csatorna_nev, category=category, overwrites=overwrites, reason="SinMTA Széf")
         await channel.send(szoveg, view=CloseTicketView())
 
-        embed = discord.Embed(title="🟢 Szuperadmin Széf Kérvényezés Nyitva", color=discord.Color.gold(), timestamp=datetime.now())
+        embed = discord.Embed(title="🟢 SinMTA Széf Kérvényezés Nyitva", color=discord.Color.gold(), timestamp=datetime.now())
         embed.add_field(name="Benyújtotta:", value=f"{user.mention} ({user.name})", inline=True)
         embed.add_field(name="Csatorna:", value=channel.mention, inline=False)
         await send_log(guild, embed)
@@ -411,7 +411,7 @@ async def on_ready():
 async def nevpanel(ctx):
     try: await ctx.message.delete()
     except: pass
-    embed = discord.Embed(title="Szuperadmin segítségnyújtás", description="Válassz a Név-váltás vagy UB kérelem között!", color=discord.Color.dark_theme())
+    embed = discord.Embed(title="SinMTA segítségnyújtás", description="Válassz a Név-váltás vagy UB kérelem között!", color=discord.Color.dark_theme())
     await ctx.send(embed=embed, view=NevValtasView())
 
 @bot.command()
@@ -466,5 +466,4 @@ async def adminszabalyzat(ctx):
     )
     await ctx.send(embed=embed)
 
-@bot.command()
-@commands.
+bot.run(os.environ.get("DISCORD_TOKEN"))
